@@ -1,0 +1,81 @@
+DOCTOR TABLE
+create table Doctor(
+Doc_ID varchar(11) not null,
+Doc_Name varchar(50) not null,
+Gender varchar(1) not null,
+E-mail varchar(50) not null,
+Age int not null,
+Salary double not null,
+Phone_Num varchar(14),
+primary key (Doc_ID));
+
+PRESCRİPTİON TABLE
+create table Prescription(
+Prs_ID varchar(11) not null,
+Time time not null,
+Date date not null,
+Doc_ID varchar(11) not null,
+Med_ID varchar(11) not null,
+Pat_ID varchar(11) not null,
+primary key (Prs_ID,Doc_ID,Med_ID,Pat_ID),
+foreign key (Doc_ID) references Doctor,
+foreign key (Med_ID) references Medicine,
+foreign key (Pat_ID) references Patient);
+
+MEDİCİNE TABLE
+create table Medicine(
+Med_ID varchar(11) not null,
+Med_Name varchar(50) not null,
+Company varchar(50) not null,
+Manu_Date varchar(10) not null,
+Exp_Date varchar(10) not null,
+Cost varchar(MAX) not null,
+primary key (Med_ID));
+
+ASSİST TABLE
+create table Assist(
+Serial_Num varchar(11) not null,
+Time time not null,
+Date date not null,
+Doc_ID varchar(11) not null,
+Pat_ID varchar(11) not null,
+Test_ID varchar(11) not null,
+primary key (Serial_Num,Doc_ID,Test_ID,Pat_ID),
+foreign key (Doc_ID) references Doctor,
+foreign key (Test_ID) references Test,
+foreign key (Pat_ID) references Patient);
+
+TEST TABLE
+create table Test(
+Test_ID varchar(11) not null,
+Test_Name varchar(25) not null,
+Date date not null,
+Fee double not null,
+Rep_Date varchar(10),
+primary key (Test_ID));
+
+DEPARTMENT TABLE
+create table Department(
+Dept_ID varchar(11) not null,
+Dept_Name varchar(50) not null,
+primary key (Dept_ID));
+
+DOCTOR_FROM_DEPARTMENT TABLE
+create table Dctr_frm_Dept(
+Dfd_ID varchar(11) not null,
+Doc_ID varchar(11) not null,
+Dept_ID varchar(11) not null,
+primary key (Dfd_ID,Doc_ID,Dept_ID),
+foreign key (Doc_ID) references Doctor,
+foreign key (Dept_ID) references Department);
+
+
+
+
+
+
+
+
+
+
+
